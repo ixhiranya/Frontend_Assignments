@@ -1,0 +1,27 @@
+.open.page {
+    text-align: center;
+    text-decoration:solid;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    padding:20px;
+    padding-top:200px;
+    background-color: rgb(220, 105, 143);
+    margin:0px;
+    height:100vh;
+    scroll-behavior: none;
+    color: rgb(156, 8, 57);
+    text-shadow: #cedae7 ;
+}
+.open.page p{
+    font-size: 15px;
+    color: white;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.open.page button a{
+    text-decoration: none;
+    font-size: 15px;
+    color:rgb(220, 105, 143);
+    border:none;
+    border-radius: 150px;
+    padding:10px;
+}   

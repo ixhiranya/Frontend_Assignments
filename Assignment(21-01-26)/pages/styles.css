@@ -1,0 +1,113 @@
+p{
+    font-size: 15px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    ;
+}
+h2{
+    text-align:center;
+}
+.header{
+    background-color: #7d9ec0;
+    padding: 20px;
+    text-align: center;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.header ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #7d9ec0;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    
+}
+.home{
+    padding: 20px;
+    background-color:#c6d188 ;
+    font-style: Georgia, 'Times New Roman', Times, serif;
+}
+.projects{
+    padding: 20px;
+    font-style: Georgia, 'Times New Roman', Times, serif;
+}
+.projects .box {
+      padding: 10px;
+      margin: 2px;
+      margin-top: none;
+      margin-bottom: none;
+      background-color: rgb(145, 196, 115);
+      align-content: center;
+      border-radius:15px;
+}
+
+.skills{
+    padding:10px;
+    background-color:rgb(118, 113, 129) ;
+}
+.skills .skills-stats {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.skills .skills-stats .stat-card {
+    width: 30%;
+    text-align: center;
+    border-radius: 15px;
+    background-color: rgb(176, 168, 193);
+    margin:10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.Contact{
+    padding: 20px;
+    background-color: rgb(179, 151, 202);
+    font-style: Georgia, 'Times New Roman', Times, serif;
+    align-items: center;
+    align-content: center;
+}
+
+.Contact .form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin:black;
+    background-color:rgb(204, 172, 229); ;
+}
+.Contact .button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-decoration: none;
+    margin:none;
+}
+.Contact .button a{
+    text-decoration: none;
+    font-size: 15px;
+    color:rgb(220, 105, 143);
+    border:none;
+    border-radius: 150px;
+    padding:10px;
+    align-content: center;
+    margin:none;
+}
+
+.footer{
+    text-align: center;
+    padding: 10px;
+    background-color: #7d9ec0;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
