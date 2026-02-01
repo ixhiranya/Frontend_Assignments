@@ -1,0 +1,91 @@
+header{
+    background-image: linear-gradient(rgba(161, 189, 186, 0.703), rgba(161, 189, 186, 0.703)),url('assests 1/assests/HeaderBack.png');
+    background-repeat: no-repeat;
+    background-size: cover; 
+    background-attachment: fixed;
+    background-position: center;
+    top:0;
+    left:0;
+    right:0;
+    margin:none;
+    display:flex;
+    justify-content: space-between;
+    height:400px;
+}
+header .header-left .top {
+    display: flex-start;
+    justify-content: flex-start;
+    padding:20px;
+    font-family: 'Times New Roman', Times, serif;
+}
+header .header-left .tagline{
+    padding:50px;
+}
+header .header-left .tagline p{
+    font-size: 50px;
+    font-weight: bold;
+    line-height: 1;
+    margin:0;
+    font-family: sans-serif;
+}
+header .header-left .tagline .word1{
+    color: rgb(68, 132, 87);
+}
+header .header-left .tagline .word4{
+    color: rgba(70, 120, 137, 0.815);
+}
+header .header-left .top img {
+    width: auto;
+    height: 50px;
+    padding:10px;
+    border-right: 1px solid black;
+}
+header .header-right img {
+    width: auto;
+    height: 450px;
+
+}
+
+main{
+    padding: 20px 50px;
+    padding-top: 30px;
+    font-family: sans-serif;
+    font-size: 17px;
+    line-height: 1.2;
+    font-weight:500;
+}
+footer{
+    text-align: center;
+    justify-content: center;
+    font-family:sans-serif;
+    color:rgba(70, 120, 137, 0.815);
+    font-weight: bold;
+    padding:10px;
+    padding-bottom:25px;
+}
+footer p{
+    padding-bottom:10px;
+}
+footer .supportedby{
+    display:flex;
+    justify-content: center;
+}
+footer .partners{
+    display:flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+footer img {
+    width: auto;
+    height: 40px;
+    display: block;
+    margin:none;
+    padding: 40px;
+    padding-top:0;
+    padding-bottom:0px;
+    border-right: 1px solid black;
+}
+footer img:last-child{
+    border-right: none;
+}
