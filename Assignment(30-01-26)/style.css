@@ -12,11 +12,29 @@ header{
     justify-content: space-between;
     height:400px;
 }
+header .header-left{
+    height:40px;
+}
 header .header-left .top {
-    display: flex-start;
+    display: flex;
     justify-content: flex-start;
-    padding:20px;
     font-family: 'Times New Roman', Times, serif;
+}
+header .header-left .top .heads{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height:20px;
+}
+header .header-left .top .heads h6{
+    margin:0px;
+    padding:5px;
+    padding-bottom:0px;
+}
+header .header-left .top .heads img{
+    width: auto;
+    height: 40px;
+    padding:10px;
 }
 header .header-left .tagline{
     padding:50px;

@@ -152,6 +152,16 @@ aside {
     max-height: calc(100vh - 50px);
 }
 
+main .about-page{
+    margin: 20px;
+    padding: 30px;
+    border: 2px solid rgb(182, 166, 190);
+    border-radius: 30px;
+    background: rgba(148, 197, 210, 0.571);
+    display:flex;
+    justify-content: space-between;
+}
+
 .posts{
     top:110px;
     display: flex;
