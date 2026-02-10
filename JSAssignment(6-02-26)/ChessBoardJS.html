@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<head>
+    <title>Chess Board</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="chess-board" id="chessBoard"></div>
+    <script>
+        const chessBoard = document.getElementById('chessBoard');
+        for (let row = 0; row < 8; row++) {
+            for (let col = 0; col < 8; col++) {
+                const square = document.createElement('div');
+                if ((row + col) % 2 === 0) {
+                    square.classList.add('white');
+                } else {
+                    square.classList.add('black');
+                }
+                chessBoard.appendChild(square);
+            }
+        }
+    </script>
+</body>
+</html>
