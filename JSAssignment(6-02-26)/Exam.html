@@ -1,0 +1,445 @@
+<html><body><script>const cars = [
+  {
+    company: "Toyota",
+    carModal: "Corolla",
+    carDetails: {
+      manufactureDate: "2018-03-12",
+      color: "White",
+      isManual: true,
+      country: "Japan"
+    }
+  },
+  {
+    company: "Honda",
+    carModal: "Civic",
+    carDetails: {
+      manufactureDate: "2019-07-21",
+      color: "Black",
+      isManual: false,
+      country: "Japan"
+    }
+  },
+  {
+    company: "Hyundai",
+    carModal: "i20",
+    carDetails: {
+      manufactureDate: "2020-01-15",
+      color: "Red",
+      isManual: true,
+      country: "South Korea"
+    }
+  },
+  {
+    company: "Ford",
+    carModal: "EcoSport",
+    carDetails: {
+      manufactureDate: "2017-11-05",
+      color: "Blue",
+      isManual: true,
+      country: "USA"
+    }
+  },
+  {
+    company: "Volkswagen",
+    carModal: "Polo",
+    carDetails: {
+      manufactureDate: "2018-06-30",
+      color: "Grey",
+      isManual: false,
+      country: "Germany"
+    }
+  },
+  {
+    company: "BMW",
+    carModal: "X1",
+    carDetails: {
+      manufactureDate: "2021-04-10",
+      color: "White",
+      isManual: false,
+      country: "Germany"
+    }
+  },
+  {
+    company: "Audi",
+    carModal: "A4",
+    carDetails: {
+      manufactureDate: "2020-09-18",
+      color: "Black",
+      isManual: false,
+      country: "Germany"
+    }
+  },
+  {
+    company: "Mercedes-Benz",
+    carModal: "C-Class",
+    carDetails: {
+      manufactureDate: "2019-02-27",
+      color: "Silver",
+      isManual: false,
+      country: "Germany"
+    }
+  },
+  {
+    company: "Tata",
+    carModal: "Nexon",
+    carDetails: {
+      manufactureDate: "2022-05-14",
+      color: "Blue",
+      isManual: true,
+      country: "India"
+    }
+  },
+  {
+    company: "Mahindra",
+    carModal: "XUV700",
+    carDetails: {
+      manufactureDate: "2023-01-09",
+      color: "White",
+      isManual: false,
+      country: "India"
+    }
+  },
+  {
+    company: "Kia",
+    carModal: "Seltos",
+    carDetails: {
+      manufactureDate: "2021-08-20",
+      color: "Orange",
+      isManual: true,
+      country: "South Korea"
+    }
+  },
+  {
+    company: "Nissan",
+    carModal: "Magnite",
+    carDetails: {
+      manufactureDate: "2020-12-03",
+      color: "Red",
+      isManual: true,
+      country: "Japan"
+    }
+  },
+  {
+    company: "Renault",
+    carModal: "Kwid",
+    carDetails: {
+      manufactureDate: "2019-10-11",
+      color: "Green",
+      isManual: true,
+      country: "France"
+    }
+  },
+  {
+    company: "Skoda",
+    carModal: "Rapid",
+    carDetails: {
+      manufactureDate: "2018-04-19",
+      color: "Silver",
+      isManual: false,
+      country: "Czech Republic"
+    }
+  },
+  {
+    company: "Chevrolet",
+    carModal: "Cruze",
+    carDetails: {
+      manufactureDate: "2017-06-22",
+      color: "Black",
+      isManual: false,
+      country: "USA"
+    }
+  },
+  {
+    company: "Jeep",
+    carModal: "Compass",
+    carDetails: {
+      manufactureDate: "2021-03-05",
+      color: "Brown",
+      isManual: true,
+      country: "USA"
+    }
+  },
+  {
+    company: "MG",
+    carModal: "Hector",
+    carDetails: {
+      manufactureDate: "2022-02-17",
+      color: "White",
+      isManual: false,
+      country: "UK"
+    }
+  },
+  {
+    company: "Volvo",
+    carModal: "XC40",
+    carDetails: {
+      manufactureDate: "2020-07-29",
+      color: "Grey",
+      isManual: false,
+      country: "Sweden"
+    }
+  },
+  {
+    company: "Peugeot",
+    carModal: "308",
+    carDetails: {
+      manufactureDate: "2019-09-14",
+      color: "Blue",
+      isManual: true,
+      country: "France"
+    }
+  },
+  {
+    company: "Fiat",
+    carModal: "Punto",
+    carDetails: {
+      manufactureDate: "2016-12-01",
+      color: "Red",
+      isManual: true,
+      country: "Italy"
+    }
+  },
+  {
+    company: "Suzuki",
+    carModal: "Swift",
+    carDetails: {
+      manufactureDate: "2021-06-08",
+      color: "Yellow",
+      isManual: true,
+      country: "Japan"
+    }
+  },
+  {
+    company: "Lexus",
+    carModal: "RX",
+    carDetails: {
+      manufactureDate: "2022-11-25",
+      color: "White",
+      isManual: false,
+      country: "Japan"
+    }
+  },
+  {
+    company: "Mazda",
+    carModal: "CX-5",
+    carDetails: {
+      manufactureDate: "2020-05-16",
+      color: "Red",
+      isManual: false,
+      country: "Japan"
+    }
+  },
+  {
+    company: "Subaru",
+    carModal: "Forester",
+    carDetails: {
+      manufactureDate: "2019-08-02",
+      color: "Green",
+      isManual: true,
+      country: "Japan"
+    }
+  },
+  {
+    company: "Mitsubishi",
+    carModal: "Outlander",
+    carDetails: {
+      manufactureDate: "2018-10-27",
+      color: "Silver",
+      isManual: false,
+      country: "Japan"
+    }
+  },
+  {
+    company: "Tesla",
+    carModal: "Model 3",
+    carDetails: {
+      manufactureDate: "2023-04-01",
+      color: "White",
+      isManual: false,
+      country: "USA"
+    }
+  },
+  {
+    company: "BYD",
+    carModal: "Atto 3",
+    carDetails: {
+      manufactureDate: "2022-09-12",
+      color: "Blue",
+      isManual: false,
+      country: "China"
+    }
+  },
+  {
+    company: "Citroën",
+    carModal: "C3",
+    carDetails: {
+      manufactureDate: "2021-01-30",
+      color: "Orange",
+      isManual: true,
+      country: "France"
+    }
+  },
+  {
+    company: "Opel",
+    carModal: "Astra",
+    carDetails: {
+      manufactureDate: "2019-03-18",
+      color: "Grey",
+      isManual: false,
+      country: "Germany"
+    }
+  },
+  {
+    company: "Seat",
+    carModal: "Ibiza",
+    carDetails: {
+      manufactureDate: "2020-06-24",
+      color: "Blue",
+      isManual: true,
+      country: "Spain"
+    }
+  }
+];
+
+// Check whether every car has a country field. (Using array methods only.)
+ 
+const checkCountryField = cars.every(car => car.carDetails.hasOwnProperty('country'));
+console.log(checkCountryField);
+
+// Find how many cars are:
+// Manual
+// Automatic
+ 
+const manualAndAutoCars=cars.reduce((acc, car) => {
+  if (car.carDetails.isManual) {
+    acc.manual++;
+  } else {
+    acc.automatic++;
+  }
+  return acc;
+}, { manual: 0, automatic: 0 });
+console.log(manualAndAutoCars);
+
+// Create a new array where:
+//   	carAge = currentYear - manufactureYear
+ 
+const carAge=cars.map(car=>{
+  const currentYear = new Date().getFullYear();
+  const manufactureYear = new Date(car.carDetails.manufactureDate).getFullYear();
+  return {
+    ...car,
+    carAge: currentYear - manufactureYear
+  };
+})
+console.log(carAge);
+
+// Using a single reduce() method, to find the total number of cars.
+
+const totalCars = cars.reduce((count) => count + 1, 0);
+console.log(totalCars);
+
+// 🔹 Q4 — Find newest car
+
+// Expected → reduce or sort
+
+const newCar=cars.reduce((newest,cars)=>{
+  const newestDate = new Date(newest.carDetails.manufactureDate);
+  const currentCarDate = new Date(cars.carDetails.manufactureDate);
+  return currentCarDate > newestDate ? cars : newest;
+});
+
+
+// 🔹 Q5 — Check if any car is before 2018
+
+// Expected → some
+
+const before2018=cars.some(cars=>new Date(cars.carDetails.manufactureDate).getFullYear() < 2018);
+console.log(before2018);
+
+// 🔹 Q6 — Get all manual cars older than 5 years
+
+// Expected → filter
+
+const manual5yearOld=cars.filter(car=>{
+  const currentYear = new Date().getFullYear();
+  const manufactureYear = new Date(car.carDetails.manufactureDate).getFullYear();
+  return car.carDetails.isManual && (currentYear - manufactureYear) > 5;
+})
+
+// 🔹 Q7 — Group cars by color
+
+// Expected → reduce
+
+const carsByColors=cars.reduce((color,car)=>{
+  const carColor = car.carDetails.color;
+  color[carColor]=(color[carColor] || []).concat(car);
+  return color;
+},{});
+console.log(carsByColors);
+
+// 🔹 Q8 — Find first German car
+
+// Expected → find
+
+const firstGermanCar=cars.sort(car=>{
+  const manufactureDate = new Date(car.carDetails.manufactureDate);
+  return manufactureDate - new Date('2018-01-01');
+}).find(car=>car.carDetails.country === 'Germany'
+);
+
+console.log(firstGermanCar);
+
+// Get an array of all car models only.
+
+const carModels=cars.map(car=>car.carModal);
+console.log(carModels);
+
+// Get all cars that are manual transmission.
+
+const manualCars=cars.filter(car=>car.carDetails.isManual);
+console.log(manualCars);
+
+// Check if any car is manufactured after 2022.
+
+//Return → true / false
+
+const after2022=cars.some(car=>new Date(car.carDetails.manufactureDate).getFullYear() > 2022);
+console.log(after2022);
+
+// Count how many cars each company has using array methods only 
+// (do not use for, while, and do-while).
+
+const carsByCompany=cars.reduce((company,car)=>{
+  const carCompany = car.company;
+  company[carCompany]=(company[carCompany] || []).concat(car);
+  return company;
+},{});
+
+// Print each company name along with its country in the following format:
+//  CompanyName - Country
+
+const companyAndCountry=cars.map(car=>`${car.company} - ${car.carDetails.country}`);
+console.log(companyAndCountry);
+
+// Find the total number of cars across all companies using array methods.
+
+const totalCars = cars.reduce((count) => count + 1, 0);
+console.log(totalCars);
+
+// Create a new array that contains the car model and its age, where:
+//  carAge = currentYear - manufactureYear
+
+//  Output format:
+//  { carModal: string, carAge: string }
+
+const carModelAndAge=cars.map(car=>{
+  const currentYear = new Date().getFullYear();
+  const manufactureYear = new Date(car.carDetails.manufactureDate).getFullYear();
+  return {
+    carModal: car.carModal,
+    carAge: currentYear - manufactureYear
+  };
+})
+</script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+body {
+  height: 100vh;
+  background: url("pexels-pixabay-33545.jpg") center/cover no-repeat;
+  color: white;
+  align-content: center;
+  justify-items: center;
+}
+
+.container {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  gap: 70px;
+  padding: 60px;
+  align-items: center;
+}
+
+.login-card {
+  width: 380px;
+  padding: 40px;
+  border-radius: 22px;
+  backdrop-filter: blur(10px);
+  background: rgba(255,255,255,0.1);
+  box-shadow: 0 0 40px rgba(0,0,0,.35);
+  justify-items: center;
+}
+
+.logo {
+  width: 54px;
+  height: 54px;
+  border-radius: 14px;
+  background: linear-gradient(135deg,#fb923c,#f472b6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  margin-bottom: 18px;
+}
+
+.login-card h2 {
+  margin-bottom: 6px;
+}
+
+.login-card p {
+  opacity: .85;
+  margin-bottom: 18px;
+}
+
+.login-card form {
+  width:250px;
+}
+
+
+label {
+  font-size: 14px;
+  margin-top: 14px;
+  display: block;
+}
+
+.input-box {
+  display: flex;
+  align-items: center;
+  background: white;
+  border-radius: 10px;
+  padding: 11px;
+  margin-top: 6px;
+}
+
+.input-box input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 14px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  margin: 14px 0;
+  font-size: 13px;
+}
+
+.row a {
+  color: #ffd6e7;
+  text-decoration: none;
+}
+
+.row a:hover {
+  color:white;
+}
+
+button {
+  width:100%;
+  padding: 13px;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  cursor: pointer;
+  background: linear-gradient(90deg,#fb923c,#f472b6);
+  color: white;
+  transition: .25s;
+}
+
+button:hover {
+  transform: translateY(-1.5px);
+  opacity: .95;
+  border:white 1px solid;
+}
+
+.right-content {
+  max-width: 650px;
+}
+
+.right-content h1 {
+  font-size: 54px;
+  letter-spacing: 1px;
+  text-shadow: black 1px 1px 2px;
+}
+
+.subtitle {
+  margin-top: 10px;
+  opacity: .9;
+  margin-bottom: 50px;
+  color:#23123f;
+  text-shadow: #f9fafb 1px 1px 3px;
+  font-style: italic;
+  font-weight: 500;
+
+}
+
+.feature-grid {
+  margin-top: 100px;
+  display: flex;
+  gap: 25px;
+}
+
+.feature {
+  background: rgba(255, 255, 255, 0.655);
+  color: #2d2d2de3;
+  padding: 20px;
+  border-radius: 20px;
+  width: 200px;  
+  padding-top: 25px;
+}
