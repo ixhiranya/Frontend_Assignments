@@ -6,9 +6,9 @@
 }
 body {
   height: 100vh;
-  background: url("pexels-pixabay-33545.jpg") center/cover no-repeat;
+  background: url("pexels-brett-sayles-3045418.jpg") center/cover no-repeat;
   color: white;
-  align-content: center;
+   align-content: center;
   justify-items: center;
 }
 
@@ -126,7 +126,7 @@ button:hover {
 .subtitle {
   margin-top: 10px;
   opacity: .9;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
   color:#23123f;
   text-shadow: #f9fafb 1px 1px 3px;
   font-style: italic;
@@ -135,13 +135,13 @@ button:hover {
 }
 
 .feature-grid {
-  margin-top: 100px;
   display: flex;
   gap: 25px;
+  margin-bottom: 100px;
 }
 
 .feature {
-  background: rgba(255, 255, 255, 0.655);
+  background: rgba(255, 255, 255, 0.708);
   color: #2d2d2de3;
   padding: 20px;
   border-radius: 20px;
