@@ -27,7 +27,7 @@
             <div class="flex flex-col md:flex-row gap-4 items-center pt-4 pb-4">
 
                 <input id="searchInput" type="text" placeholder="Search Pokémon"
-                    class="flex-1 p-2 rounded-xl text-md" />
+                    class="flex-1 p-2 rounded-xl text-md w-2xl" />
 
                 <button id="searchBtn">
                     <svg class="h-10 w-10 bg-orange-600 rounded-xl text-white p-3 hover:bg-orange-700 transition"
@@ -46,16 +46,13 @@
         </div>
     </div>
 
-    <!-- CONTROLS BAR -->
     <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 ">
 
-        <!-- Surprise Me -->
         <button id="surpriseBtn"
             class="bg-cyan-600 hover:bg-cyan-700 text-white px-12 py-4 m-10 rounded-xl text-xl font-semibold flex items-center gap-3 shadow">Surprise
             Me!
         </button>
 
-        <!-- Sort -->
         <div class="flex items-center gap-4 m-10">
             <span class="text-xl text-gray-500">Sort By</span>
 
@@ -70,7 +67,6 @@
     </div>
 
     </div>
-    </header>
     <main class="max-w-8xl mx-auto p-6">
         <div id="pokemonGrid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
         </div>
@@ -89,17 +85,17 @@
     <footer class="bg-zinc-900 text-gray-200 mt-16">
         <div class="max-w-5xl mx-auto p-8 grid md:grid-cols-2 gap-10">
             <div>
-                <h2 class="text-2xl font-bold mb-4">Sign up for Pokémon emails!</h2>
-                <input type="email" placeholder="Email" class="w-full p-2 mb-4 rounded bg-zinc-200 text-black">
+                <h2 id="signup" class="text-2xl font-bold mb-4">Sign up for Pokémon emails!</h2>
+                <input type="email" id="signUpEmail"placeholder="Email" class="w-full p-2 mb-4 rounded bg-zinc-200 text-black">
                 <div class="grid grid-cols-2 gap-4 mb-4">
-                    <select class="p-2 rounded bg-zinc-200 text-black">
+                    <select id="signUpCountry" class="p-2 rounded bg-zinc-200 text-black">
                         <option>United States</option>
                         <option>India</option>
                         <option>UK</option>
                     </select>
-                    <input type="date" class="p-2 rounded bg-zinc-200 text-black">
+                    <input id="signupDOB" type="date" class="p-2 rounded bg-zinc-200 text-black">
                 </div>
-                <button class="bg-gray-500 px-8 py-2 rounded font-bold hover:bg-gray-600">
+                <button id="signUpButton"class="bg-gray-500 px-8 py-2 rounded font-bold hover:bg-gray-600">
                     SIGN UP
                 </button>
             </div>

@@ -84,7 +84,7 @@ async function getPokemonCard(url) {
   pokemonCache.push(data);
   const card = document.createElement("div");
   card.className =
-    "pokemon-card bg-white rounded-xl shadow p-4 text-center cursor-pointer hover:scale-105 transition";
+    "pokemon-card bg-white rounded-xl shadow p-4 text-center cursor-pointer hover:scale-105 focus:outline-red-Adhyega2 transition";
   card.dataset.name = data.name;
   card.dataset.id = data.id;
   const types = data.types
@@ -95,7 +95,7 @@ async function getPokemonCard(url) {
          class="w-28 h-28 mx-auto">
     <h3 class="capitalize font-bold text-lg">${data.name}</h3>
     <p class="text-gray-500">#${data.id}</p>
-    <div class="flex gap-2 justify-center mt-2">${types}</div>
+    <div class="flex gap-2 justify-center mt-2 capitalize">${types}</div>
   `;
   card.onclick = () => showDetails(data.id);
   grid.appendChild(card);
@@ -129,7 +129,7 @@ async function showDetails(id) {
     .join(", ");
 
   content.innerHTML = `
-    <button onclick="closeModal()" class="float-right text-xl">✖</button>
+    <button onclick="closeModal()" class="float-right text-xl">X</button>
 
     <img src="${p.sprites.other['official-artwork'].front_default}"
          class="w-48 mx-auto">
@@ -150,5 +150,43 @@ async function showDetails(id) {
 }
 
 function closeModal() {
-  modal.classList.add("hidden");
+  document.getElementById("modal").classList.add("hidden");
+}
+
+// signup
+
+const signUpButton = document.getElementById("signUpButton");
+signUpButton.onclick = handleSignup;
+function handleSignup() {
+  const email = document.getElementById("signUpEmail").value.trim();
+  const country = document.getElementById("signUpCountry").value;
+  const birthday = document.getElementById("signupDOB").value;
+  if (!email) {
+    alert("Email is required");
+    return;
+  }
+  if (!validateEmail(email)) {
+    alert("Enter valid email");
+    return;
+  }
+  if (!birthday) {
+    alert("Birthday required");
+    return;
+  }
+  const signupData = {
+    email,
+    country,
+    birthday,
+    time: new Date().toISOString()
+  };
+  localStorage.setItem(
+    "pokedex_signup",
+    JSON.stringify(signupData)
+  );
+  alert("Signup successful 🎉");
+  signUpButton.disabled = true;
+  signUpButton.classList.add("opacity-50", "cursor-not-allowed");
+}
+function validateEmail(e) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
 }
