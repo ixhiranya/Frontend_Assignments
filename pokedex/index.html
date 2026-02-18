@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Pokédex</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+</head>
+
+<body class="bg-gray-100 ">
+
+    <header class="bg-white shadow justify-items-center">
+        <div class="flex flex-col md:flex-row gap-4 items-center p-0">
+            <img src="classic-pokeball-icon-bz7scg4mnbfupv57.png" class="w-20 pt-3">
+            <h1 class="text-5xl font-bold text-red-600">Pokédex</h1>
+        </div>
+    </header>
+
+    <div class=" flex flex-col md:flex-row gap-4 items-center bg-gray-600 m-none ">
+        <div class="mx-40 p-10">
+            <label class="text-2xl pb-10 font-serif text-white">
+                Name or Number
+            </label><br>
+
+            <div class="flex flex-col md:flex-row gap-4 items-center pt-4 pb-4">
+
+                <input id="searchInput" type="text" placeholder="Search Pokémon"
+                    class="flex-1 p-2 rounded-xl text-md" />
+
+                <button id="searchBtn">
+                    <svg class="h-10 w-10 bg-orange-600 rounded-xl text-white p-3 hover:bg-orange-700 transition"
+                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                    </svg>
+                </button>
+
+            </div>
+        </div>
+
+        <div class="p-5 bg-green-500 mr-20 rounded-2xl text-white text-md items-center">
+            <p>Search for a Pokémon by name or using its National Pokémon number. </p>
+        </div>
+    </div>
+
+    <!-- CONTROLS BAR -->
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 ">
+
+        <!-- Surprise Me -->
+        <button id="surpriseBtn"
+            class="bg-cyan-600 hover:bg-cyan-700 text-white px-12 py-4 m-10 rounded-xl text-xl font-semibold flex items-center gap-3 shadow">Surprise
+            Me!
+        </button>
+
+        <!-- Sort -->
+        <div class="flex items-center gap-4 m-10">
+            <span class="text-xl text-gray-500">Sort By</span>
+
+            <select id="sortOrder" class="bg-gray-800 text-white px-6 py-3 rounded-lg text-xl shadow outline-none">
+                <option value="id-asc">Lowest Number (First)</option>
+                <option value="id-desc">Highest Number (First)</option>
+                <option value="name-asc">A–Z</option>
+                <option value="name-desc">Z–A</option>
+            </select>
+        </div>
+
+    </div>
+
+    </div>
+    </header>
+    <main class="max-w-8xl mx-auto p-6">
+        <div id="pokemonGrid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+        </div>
+
+        <div class="text-center mt-6">
+            <button id="loadMoreBtn" class="bg-red-600 text-white px-6 py-2 rounded">
+                Load More
+            </button>
+        </div>
+    </main>
+    <div id="modal" class="fixed inset-0 bg-black/60 hidden items-center justify-center p-4">
+        <div id="modalContent" class="bg-white rounded-lg p-6 w-full max-w-2xl overflow-y-auto">
+        </div>
+    </div>
+
+    <footer class="bg-zinc-900 text-gray-200 mt-16">
+        <div class="max-w-5xl mx-auto p-8 grid md:grid-cols-2 gap-10">
+            <div>
+                <h2 class="text-2xl font-bold mb-4">Sign up for Pokémon emails!</h2>
+                <input type="email" placeholder="Email" class="w-full p-2 mb-4 rounded bg-zinc-200 text-black">
+                <div class="grid grid-cols-2 gap-4 mb-4">
+                    <select class="p-2 rounded bg-zinc-200 text-black">
+                        <option>United States</option>
+                        <option>India</option>
+                        <option>UK</option>
+                    </select>
+                    <input type="date" class="p-2 rounded bg-zinc-200 text-black">
+                </div>
+                <button class="bg-gray-500 px-8 py-2 rounded font-bold hover:bg-gray-600">
+                    SIGN UP
+                </button>
+            </div>
+
+            <div class="space-y-4 text-lg">
+                <p class="font-semibold">I’d like to receive emails about:</p>
+                <label class="flex items-center gap-3">
+                    <input type="checkbox" checked class="w-5 h-5">
+                    Pokémon video games, apps, and more
+                </label>
+                <label class="flex items-center gap-3">
+                    <input type="checkbox" checked class="w-5 h-5">
+                    Pokémon Center (official shop)
+                </label>
+                <label class="flex items-center gap-3">
+                    <input type="checkbox" class="w-5 h-5">
+                    I accept Terms of Use & Privacy Notice
+                </label>
+            </div>
+        </div>
+
+        <div class="border-t border-zinc-700">
+            <div class="max-w46xl mx-auto p-8 grid md:grid-cols-3 gap-10">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">The Pokémon Company</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li>News</li>
+                        <li>Parents Guide</li>
+                        <li>Customer Service</li>
+                        <li>About Our Company</li>
+                        <li>Careers</li>
+                        <li>Press Site</li>
+                    </ul>
+                </div>
+
+                <div class="flex flex-col items-center gap-4 border-l border-r border-gray-700 px-6">
+                    <div class="flex gap-4 text-xl">
+                        <a href="https://facebook.com" target="_blank"
+                            class="bg-blue-800 hover:bg-blue-900 text-white w-12 h-12 rounded-lg flex items-center justify-center transition"><i
+                                class="fab fa-facebook"></i></a>
+                        <a href="https://twitter.com" target="_blank"
+                            class="bg-blue-600 hover:bg-blue-700 text-white w-12 h-12 rounded-lg flex items-center justify-center transition"><i
+                                class="fab fa-twitter"></i></a>
+                        <a href="https://pinterest.com" target="_blank"
+                            class="bg-red-600 hover:bg-red-700 text-white w-12 h-12 rounded-lg flex items-center justify-center transition"><i
+                                class="fab fa-pinterest"></i></a>
+                        <a href="https://instagram.com" target="_blank"
+                            class="bg-purple-600 hover:bg-purple-700 text-white w-12 h-12 rounded-lg flex items-center justify-center transition"><i
+                                class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <div class="text-gray-400 space-y-2">
+                    <p>Terms of Use</p>
+                    <p>Privacy Notice</p>
+                    <p>Cookie Page</p>
+                    <p>Legal Info</p>
+                    <p>Security</p>
+
+                    <p class="pt-4 text-sm">
+                        © Pokémon Demo Project — Built with PokéAPI
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+
+</body>
+
+</html>
