@@ -4,57 +4,45 @@ async function loadPokemonNames() {
   const res = await fetch(
     "https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0"
   );
-
   const data = await res.json();
-
   pokemonNames = data.results.map(p => p.name);
 }
+
 loadPokemonNames();
+
 const searchInput = document.getElementById("searchInput");
 const suggestions = document.getElementById("suggestions");
 
 searchInput.addEventListener("input", () => {
-
   const value = searchInput.value.toLowerCase();
-
   if (!value) {
     suggestions.classList.add("hidden");
     return;
   }
-
   const matches = pokemonNames
     .filter(name => name.startsWith(value))
     .slice(0, 8); // limit suggestions
-
   renderSuggestions(matches);
 });
+
 function renderSuggestions(list) {
-
   suggestions.innerHTML = "";
-
   if (!list.length) {
     suggestions.classList.add("hidden");
     return;
   }
-
   list.forEach(name => {
-
     const item = document.createElement("div");
-
     item.className =
       "p-2 hover:bg-gray-100 cursor-pointer capitalize";
-
     item.textContent = name;
-
     item.onclick = () => {
       searchInput.value = name;
       suggestions.classList.add("hidden");
       searchPokemon();
     };
-
     suggestions.appendChild(item);
   });
-
   suggestions.classList.remove("hidden");
 }
 document.addEventListener("click", (e) => {
