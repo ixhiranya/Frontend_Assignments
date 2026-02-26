@@ -1,8 +1,8 @@
-//Search
+//suggestions
 let pokemonNames = [];
 async function loadPokemonNames() {
   const res = await fetch(
-    "https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0"
+    "https://pokeapi.co/api/v2/pokemon?limit=1052&offset=0"
   );
   const data = await res.json();
   pokemonNames = data.results.map(p => p.name);
@@ -21,7 +21,7 @@ searchInput.addEventListener("input", () => {
   }
   const matches = pokemonNames
     .filter(name => name.startsWith(value))
-    .slice(0, 8); // limit suggestions
+    .slice(0, 8);
   renderSuggestions(matches);
 });
 
@@ -51,6 +51,8 @@ document.addEventListener("click", (e) => {
     suggestions.classList.add("hidden");
   }
 });
+
+//Search
 
 document.getElementById("searchBtn").onclick = searchPokemon;
 
@@ -165,16 +167,16 @@ const typeColors = {
   electric:"bg-yellow-400 border border-solid border-yellow-700 text-yellow-700",
   grass:"bg-green-400 border border-solid border-green-800 text-green-800",
   ice:"bg-cyan-300 border border-solid border-cyan-600 text-cyan-700",
-  fighting:"bg-red-700 border border-solid border-red-900 text-red-900",
+  fighting:"bg-red-400 border border-solid border-red-900 text-red-900",
   poison:"bg-purple-400 border border-solid border-purple-900 text-purple-900",
-  ground:"bg-yellow-700 border border-solid border-yellow-900 text-yellow-900",
+  ground:"bg-yellow-400 border border-solid border-yellow-900 text-yellow-900",
   flying:"bg-indigo-400 border border-solid border-indigo-900 text-indigo-900",
-  psychic:"bg-pink-500 border border-solid border-pink-800 text-pink-800",
+  psychic:"bg-pink-500 border border-solid border-pink-800 text-pink-900",
   bug:"bg-lime-400 border border-solid border-lime-700 text-lime-700",
   rock:"bg-stone-500 border border-solid border-stone-800 text-stone-800",
   ghost:"bg-violet-600 border border-solid border-violet-900 text-violet-900",
-  dragon:"bg-indigo-700 border border-solid border-indigo-900 text-indigo-900",
-  dark:"bg-gray-800 border border-solid border-black text-black",
+  dragon:"bg-indigo-400 border border-solid border-indigo-900 text-indigo-900",
+  dark:"bg-gray-400 border border-solid border-black text-black",
   steel:"bg-slate-400 border border-solid border-slate-700 text-slate-700",
   fairy:"bg-pink-300 border border-solid border-pink-600 text-pink-600"
 };
@@ -185,7 +187,7 @@ async function getPokemonCard(url) {
     pokemonCache.push(data);
     const card = document.createElement("div");
     card.className =
-        "pokemon-card bg-gray-300 rounded-xl shadow p-4 text-center cursor-pointer border-solid border-gray-700 text-gray-700 hover:scale-105 transition ";
+        "pokemon-card bg-gray-200 rounded-xl shadow p-4 text-center cursor-pointer border-solid border-gray-700 text-gray-700 hover:scale-105 transition ";
     card.dataset.name = data.name;
     card.dataset.id = data.id;
     const types = data.types
@@ -322,7 +324,7 @@ window.addEventListener("popstate", () => {
     const state = getURLState();
 
     if (state.id) {
-        showDetails(state.id);   // only 1 call
+        showDetails(state.id); 
     } else {
         closeModal();
         loadPokemon(state.page);
