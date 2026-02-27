@@ -1,11 +1,11 @@
 //suggestions
 let pokemonNames = [];
 async function loadPokemonNames() {
-  const res = await fetch(
-    "https://pokeapi.co/api/v2/pokemon?limit=1052&offset=0"
-  );
-  const data = await res.json();
-  pokemonNames = data.results.map(p => p.name);
+    const res = await fetch(
+        "https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0"
+    );
+    const data = await res.json();
+    pokemonNames = data.results.map(p => p.name);
 }
 
 loadPokemonNames();
@@ -14,42 +14,42 @@ const searchInput = document.getElementById("searchInput");
 const suggestions = document.getElementById("suggestions");
 
 searchInput.addEventListener("input", () => {
-  const value = searchInput.value.toLowerCase();
-  if (!value) {
-    suggestions.classList.add("hidden");
-    return;
-  }
-  const matches = pokemonNames
-    .filter(name => name.startsWith(value))
-    .slice(0, 8);
-  renderSuggestions(matches);
+    const value = searchInput.value.toLowerCase();
+    if (!value) {
+        suggestions.classList.add("hidden");
+        return;
+    }
+    const matches = pokemonNames
+        .filter(name => name.startsWith(value))
+        .slice(0, 8);
+    renderSuggestions(matches);
 });
 
 function renderSuggestions(list) {
-  suggestions.innerHTML = "";
-  if (!list.length) {
-    suggestions.classList.add("hidden");
-    return;
-  }
-  list.forEach(name => {
-    const item = document.createElement("div");
-    item.className =
-      "p-2 hover:bg-gray-100 cursor-pointer capitalize";
-    item.textContent = name;
-    item.onclick = () => {
-      searchInput.value = name;
-      suggestions.classList.add("hidden");
-      searchPokemon();
-    };
-    suggestions.appendChild(item);
-  });
-  suggestions.classList.remove("hidden");
+    suggestions.innerHTML = "";
+    if (!list.length) {
+        suggestions.classList.add("hidden");
+        return;
+    }
+    list.forEach(name => {
+        const item = document.createElement("div");
+        item.className =
+            "p-2 hover:bg-gray-100 cursor-pointer capitalize";
+        item.textContent = name;
+        item.onclick = () => {
+            searchInput.value = name;
+            suggestions.classList.add("hidden");
+            searchPokemon();
+        };
+        suggestions.appendChild(item);
+    });
+    suggestions.classList.remove("hidden");
 }
 document.addEventListener("click", (e) => {
-  if (!searchInput.contains(e.target) &&
-      !suggestions.contains(e.target)) {
-    suggestions.classList.add("hidden");
-  }
+    if (!searchInput.contains(e.target) &&
+        !suggestions.contains(e.target)) {
+        suggestions.classList.add("hidden");
+    }
 });
 
 //Search
@@ -57,18 +57,18 @@ document.addEventListener("click", (e) => {
 document.getElementById("searchBtn").onclick = searchPokemon;
 
 document.getElementById("searchInput").addEventListener("keydown", e => {
-  if (e.key === "Enter") searchPokemon();
+    if (e.key === "Enter") searchPokemon();
 });
 
 async function searchPokemon() {
-  const value = document.getElementById("searchInput").value.toLowerCase();
-  if (!value) return;
-  grid.innerHTML = "";
-  try {
-    await getPokemonCard(`https://pokeapi.co/api/v2/pokemon/${value}`);
-  } catch {
-    grid.innerHTML = `<p class="text-red-600 text-xl">Not found</p>`;
-  }
+    const value = document.getElementById("searchInput").value.toLowerCase();
+    if (!value) return;
+    grid.innerHTML = "";
+    try {
+        await getPokemonCard(`https://pokeapi.co/api/v2/pokemon/${value}`);
+    } catch {
+        grid.innerHTML = `<p class="text-red-600 text-xl">Not found</p>`;
+    }
 }
 
 //Random Generation
@@ -137,84 +137,102 @@ const totalPages = Math.ceil(TOTAL_POKEMON / limit);
 
 const pokemonCache = [];
 async function loadPokemon(page = 1) {
+
+    // 🚀 Prevent invalid pages
+    if (page < 1) page = 1;
+    if (page > totalPages) page = totalPages;
+
     grid.innerHTML = "";
+
     const offset = (page - 1) * limit;
+
     const res = await fetch(
         `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`
     );
+
     const data = await res.json();
-    for (const p of data.results) {
-        await getPokemonCard(p.url);
+
+    // extra safety check
+    if (!data.results.length) {
+        grid.innerHTML =
+          `<p class="text-center text-red-600 text-xl">
+             Invalid page
+           </p>`;
+        return;
     }
+
+    for (const p of data.results) {
+
+        const id = p.url
+            .split("/")
+            .filter(Boolean)
+            .pop();
+
+        createPokemonCard({
+            id,
+            name: p.name
+        });
+    }
+
     currentPage = page;
-    const state = getURLState();
-    updateURL(page, state.id);
+    updateURL(page);
 }
 const state = getURLState();
 
-if (state.id) {
-    showDetails(state.id);
-} else {
-    loadPokemon(state.page);
-}
+loadPokemon(state.page);
+
 
 //Poke Card
+function getPokemonImage(id) {
+    return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
+}
 
-const typeColors = {
-  normal:"bg-gray-400 border border-solid border-gray-700 text-gray-700",
-  fire:"bg-red-400 border border-solid border-red-800 text-red-800",
-  water:"bg-blue-400 border border-solid border-blue-900 text-blue-900",
-  electric:"bg-yellow-400 border border-solid border-yellow-700 text-yellow-700",
-  grass:"bg-green-400 border border-solid border-green-800 text-green-800",
-  ice:"bg-cyan-300 border border-solid border-cyan-600 text-cyan-700",
-  fighting:"bg-red-400 border border-solid border-red-900 text-red-900",
-  poison:"bg-purple-400 border border-solid border-purple-900 text-purple-900",
-  ground:"bg-yellow-400 border border-solid border-yellow-900 text-yellow-900",
-  flying:"bg-indigo-400 border border-solid border-indigo-900 text-indigo-900",
-  psychic:"bg-pink-500 border border-solid border-pink-800 text-pink-900",
-  bug:"bg-lime-400 border border-solid border-lime-700 text-lime-700",
-  rock:"bg-stone-500 border border-solid border-stone-800 text-stone-800",
-  ghost:"bg-violet-600 border border-solid border-violet-900 text-violet-900",
-  dragon:"bg-indigo-400 border border-solid border-indigo-900 text-indigo-900",
-  dark:"bg-gray-400 border border-solid border-black text-black",
-  steel:"bg-slate-400 border border-solid border-slate-700 text-slate-700",
-  fairy:"bg-pink-300 border border-solid border-pink-600 text-pink-600"
-};
+// const typeColors = {
+//   normal:"bg-gray-400 border border-solid border-gray-700 text-gray-700",
+//   fire:"bg-red-400 border border-solid border-red-800 text-red-800",
+//   water:"bg-blue-400 border border-solid border-blue-900 text-blue-900",
+//   electric:"bg-yellow-400 border border-solid border-yellow-700 text-yellow-700",
+//   grass:"bg-green-400 border border-solid border-green-800 text-green-800",
+//   ice:"bg-cyan-300 border border-solid border-cyan-600 text-cyan-700",
+//   fighting:"bg-red-400 border border-solid border-red-900 text-red-900",
+//   poison:"bg-purple-400 border border-solid border-purple-900 text-purple-900",
+//   ground:"bg-yellow-400 border border-solid border-yellow-900 text-yellow-900",
+//   flying:"bg-indigo-400 border border-solid border-indigo-900 text-indigo-900",
+//   psychic:"bg-pink-500 border border-solid border-pink-800 text-pink-900",
+//   bug:"bg-lime-400 border border-solid border-lime-700 text-lime-700",
+//   rock:"bg-stone-500 border border-solid border-stone-800 text-stone-800",
+//   ghost:"bg-violet-600 border border-solid border-violet-900 text-violet-900",
+//   dragon:"bg-indigo-400 border border-solid border-indigo-900 text-indigo-900",
+//   dark:"bg-gray-400 border border-solid border-black text-black",
+//   steel:"bg-slate-400 border border-solid border-slate-700 text-slate-700",
+//   fairy:"bg-pink-300 border border-solid border-pink-600 text-pink-600"
+// };
 
-async function getPokemonCard(url) {
-    const res = await fetch(url);
-    const data = await res.json();
-    pokemonCache.push(data);
+
+function createPokemonCard(data) {
+
     const card = document.createElement("div");
+
     card.className =
-        "pokemon-card bg-gray-200 rounded-xl shadow p-4 text-center cursor-pointer border-solid border-gray-700 text-gray-700 hover:scale-105 transition ";
+        "pokemon-card bg-gray-200 rounded-xl shadow p-4 text-center cursor-pointer border-solid border-gray-700 text-gray-700 hover:scale-105 transition";
+
     card.dataset.name = data.name;
     card.dataset.id = data.id;
-    const types = data.types
-        .map(t => {
-            const typeName = t.type.name;
-            const color = typeColors[typeName] || "bg-gray-200/20 border-gray-400";
 
-            return `
-      <span class="${color} 
-        px-3 py-1 rounded-full text-sm font-semibold
-        border backdrop-blur-sm">
-        ${typeName}
-      </span>
-    `;
-        })
-        .join(" ");
     card.innerHTML = `
-    <img src="${data.sprites.other['official-artwork'].front_default}"
-         class="w-28 h-28 mx-auto">
-    <h3 class="capitalize font-bold text-lg">${data.name}</h3>
-    <p class="text-gray-500">#${data.id}</p>
-    <div class="flex gap-2 justify-center mt-2 capitalize">${types}</div>
-  `;
+      <img src="${getPokemonImage(data.id)}"
+           loading="lazy"
+           class="w-28 h-28 mx-auto">
+
+      <h3 class="capitalize font-bold text-lg">${data.name}</h3>
+
+      <p class="text-gray-500">#${data.id}</p>
+    `;
+
     card.onclick = () => {
-        updateURL(currentPage, data.id);
-        showDetails(data.id);
+        window.location.href = `pokemon.html?id=${data.id}`;
     };
+
     grid.appendChild(card);
 }
 
@@ -232,55 +250,54 @@ document.getElementById("nextPage").onclick = () => {
     }
 }
 
-
 //Poke details
 
-async function showDetails(id) {
-    const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
-    const p = await res.json();
+// async function showDetails(id) {
+//     const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
+//     const p = await res.json();
 
-    const modal = document.getElementById("modal");
-    const content = document.getElementById("modalContent");
+//     const modal = document.getElementById("modal");
+//     const content = document.getElementById("modalContent");
 
-    const statsHTML = p.stats.map(s => `
-    <div>
-      <p class="text-sm">${s.stat.name}</p>
-      <div class="bg-gray-200 h-3 rounded">
-        <div class="bg-orange-500 h-3 rounded"
-             style="width:${Math.min(s.base_stat, 100)}%"></div>
-      </div>
-    </div>
-  `).join("");
+//     const statsHTML = p.stats.map(s => `
+//     <div>
+//       <p class="text-sm">${s.stat.name}</p>
+//       <div class="bg-gray-200 h-3 rounded">
+//         <div class="bg-orange-500 h-3 rounded"
+//              style="width:${Math.min(s.base_stat, 100)}%"></div>
+//       </div>
+//     </div>
+//   `).join("");
 
-    const abilities = p.abilities
-        .map(a => a.ability.name)
-        .join(", ");
+//     const abilities = p.abilities
+//         .map(a => a.ability.name)
+//         .join(", ");
 
-    content.innerHTML = `
-    <button onclick="closeModal()" class="float-right text-xl">X</button>
+//     content.innerHTML = `
+//     <button onclick="closeModal()" class="float-right text-xl">X</button>
 
-    <img src="${p.sprites.other['official-artwork'].front_default}"
-         class="w-48 mx-auto">
+//     <img src="${p.sprites.other['official-artwork'].front_default}"
+//          class="w-48 mx-auto">
 
-    <h2 class="text-2xl font-bold capitalize text-center">${p.name}</h2>
-    <p class="text-center text-gray-500">#${p.id}</p>
+//     <h2 class="text-2xl font-bold capitalize text-center">${p.name}</h2>
+//     <p class="text-center text-gray-500">#${p.id}</p>
 
-    <p class="mt-3"><b>Height:</b> ${p.height}</p>
-    <p><b>Weight:</b> ${p.weight}</p>
-    <p><b>Abilities:</b> ${abilities}</p>
+//     <p class="mt-3"><b>Height:</b> ${p.height}</p>
+//     <p><b>Weight:</b> ${p.weight}</p>
+//     <p><b>Abilities:</b> ${abilities}</p>
 
-    <h3 class="font-bold mt-4">Stats</h3>
-    ${statsHTML}
-  `;
+//     <h3 class="font-bold mt-4">Stats</h3>
+//     ${statsHTML}
+//   `;
 
-    modal.classList.remove("hidden");
-    modal.classList.add("flex");
-}
+//     modal.classList.remove("hidden");
+//     modal.classList.add("flex");
+// }
 
-function closeModal() {
-    document.getElementById("modal").classList.add("hidden");
-    updateURL(currentPage);
-}
+// function closeModal() {
+//     document.getElementById("modal").classList.add("hidden");
+//     updateURL(currentPage);
+// }
 
 // signup
 
@@ -324,7 +341,7 @@ window.addEventListener("popstate", () => {
     const state = getURLState();
 
     if (state.id) {
-        showDetails(state.id); 
+        showDetails(state.id);
     } else {
         closeModal();
         loadPokemon(state.page);
