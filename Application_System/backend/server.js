@@ -19,6 +19,10 @@ connectDB();
 
 const {sql}=require("./db");
 app.get("/forms",async(req,res)=>{
-    const result=await sql.query("SELECT * FROM application_forms");
-    res.json(result.recordset);
+    try{
+        const result=await sql.query("SELECT * FROM application_forms");
+        res.json(result.recordset);
+    }catch(err){
+        console.log(err);
+    }
 });
