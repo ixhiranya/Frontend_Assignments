@@ -40,3 +40,15 @@ INSERT INTO application_forms (form_name)
 VALUES ('Scholarship Form'),
        ('Bank Locker Form'),
        ('College Admission');
+
+SELECT * FROM application_forms;
+SELECT * FROM master_documents;
+SELECT * FROM form_document_config;
+
+CREATE TABLE file_types (
+    type_id INT IDENTITY PRIMARY KEY,
+    type_name VARCHAR(50)
+);
+
+INSERT INTO file_types (type_name)
+VALUES ('pdf'), ('jpg'), ('png'), ('docx'), ('xlsx'), ('zip');
