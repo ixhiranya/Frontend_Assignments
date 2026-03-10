@@ -41,13 +41,6 @@ JWT_SECRET=change_this_to_something_secret
 ```bash
 cd backend
 npm install
-node seed.js
-```
-
-Creates:
-- `admin` / `Admin@123` → Admin role
-- `client1` / `Client@123` → Client role
-- `client2` / `Client@123` → Client role
 
 ### Step 4: Start Server
 ```bash
