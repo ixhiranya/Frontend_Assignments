@@ -67,14 +67,58 @@ const updateForm = async (req, res) => {
 
 // DELETE /api/forms/:id
 const deleteForm = async (req, res) => {
+  const { id } = req.params;
+  const pool = await getPool();
+  const transaction = new sql.Transaction(pool);
+
   try {
-    const pool = await getPool();
-    await pool.request()
-      .input('id', sql.Int, req.params.id)
+    await transaction.begin();
+
+    // Step 1: Get all applications for this form
+    const appsReq = new sql.Request(transaction);
+    const appsResult = await appsReq
+      .input('form_id', sql.Int, id)
+      .query('SELECT application_id FROM Applications WHERE form_id = @form_id');
+
+    const applicationIds = appsResult.recordset.map(app => app.application_id);
+
+    // Step 2: Delete uploaded documents for these applications (if any exist)
+    if (applicationIds.length > 0) {
+      const uploadedDocsReq = new sql.Request(transaction);
+      await uploadedDocsReq
+        .input('applicationIds', sql.VarChar, applicationIds.join(','))
+        .query(`DELETE FROM UploadedDocuments WHERE application_id IN (${applicationIds.join(',')})`);
+    }
+
+    // Step 3: Delete applications for this form
+    const deleteAppsReq = new sql.Request(transaction);
+    await deleteAppsReq
+      .input('form_id', sql.Int, id)
+      .query('DELETE FROM Applications WHERE form_id = @form_id');
+
+    // Step 4: Delete document configs for this form
+    const deleteConfigsReq = new sql.Request(transaction);
+    await deleteConfigsReq
+      .input('form_id', sql.Int, id)
+      .query('DELETE FROM FormDocumentConfig WHERE form_id = @form_id');
+
+    // Step 5: Delete sections for this form
+    const deleteSectionsReq = new sql.Request(transaction);
+    await deleteSectionsReq
+      .input('form_id', sql.Int, id)
+      .query('DELETE FROM FormSections WHERE form_id = @form_id');
+
+    // Step 6: Delete the form itself
+    const deleteFormReq = new sql.Request(transaction);
+    await deleteFormReq
+      .input('id', sql.Int, id)
       .query('DELETE FROM ApplicationForms WHERE form_id = @id');
-    res.json({ success: true, message: 'Form deleted.' });
+
+    await transaction.commit();
+    res.json({ success: true, message: 'Form and all related data deleted.' });
   } catch (err) {
-    console.error(err);
+    await transaction.rollback();
+    console.error('Delete form error:', err);
     res.status(500).json({ success: false, message: 'Failed to delete form.' });
   }
 };
