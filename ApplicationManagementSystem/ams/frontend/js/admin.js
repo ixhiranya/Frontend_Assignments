@@ -41,7 +41,7 @@ async function loadStats() {
   ];
 
   document.getElementById('statsGrid').innerHTML = cards.map(c => `
-    <div class="stat-card flex items-center gap-4 border-indigo-200 border border-solid hover:bg-indigo-100 transition ">
+    <div class="stat-card flex items-center gap-4 border-indigo-200 border border-solid bg-indigo-200 hover:bg-indigo-100 transition ">
       <div class="w-12 h-12 rounded-2xl bg-gradient-to-br ${c.color} flex items-center justify-center text-xl shadow-xs">${c.icon}</div>
       <div>
         <div class="text-2xl font-extrabold text-slate-800">${c.value}</div>
@@ -84,7 +84,7 @@ async function loadForms() {
     return;
   }
   tbody.innerHTML = forms.map((f, i) => `
-    <tr class="hover:bg-slate-50 transition">
+    <tr class="hover:bg-indigo-100 transition">
       <td class="px-6 py-4 text-slate-400 font-medium">${i+1}</td>
       <td class="px-6 py-4 font-semibold text-slate-800">${f.form_name}</td>
       <td class="px-6 py-4"><code class="bg-slate-100 text-slate-600 px-2 py-0.5 rounded text-xs">FORM-${f.form_id}</code></td>
