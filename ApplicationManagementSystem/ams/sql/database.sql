@@ -1,11 +1,5 @@
--- ================================================================
--- Application Management System - Database Setup Script
--- Run this script in SQL Server Management Studio (SSMS)
--- ================================================================
-
 USE master;
 GO
-
 IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = 'AppManagementSystem')
 BEGIN
     CREATE DATABASE AppManagementSystem;
@@ -16,9 +10,6 @@ GO
 USE AppManagementSystem;
 GO
 
--- ----------------------------------------------------------------
--- Drop existing tables in dependency order
--- ----------------------------------------------------------------
 IF OBJECT_ID('dbo.UploadedDocuments',   'U') IS NOT NULL DROP TABLE dbo.UploadedDocuments;
 IF OBJECT_ID('dbo.Applications',        'U') IS NOT NULL DROP TABLE dbo.Applications;
 IF OBJECT_ID('dbo.FormDocumentConfig',  'U') IS NOT NULL DROP TABLE dbo.FormDocumentConfig;
@@ -28,9 +19,6 @@ IF OBJECT_ID('dbo.ApplicationForms',    'U') IS NOT NULL DROP TABLE dbo.Applicat
 IF OBJECT_ID('dbo.Users',               'U') IS NOT NULL DROP TABLE dbo.Users;
 GO
 
--- ----------------------------------------------------------------
--- Users
--- ----------------------------------------------------------------
 CREATE TABLE Users (
     user_id       INT IDENTITY(1,1) PRIMARY KEY,
     username      NVARCHAR(100) NOT NULL UNIQUE,
@@ -41,9 +29,6 @@ CREATE TABLE Users (
 );
 GO
 
--- ----------------------------------------------------------------
--- ApplicationForms
--- ----------------------------------------------------------------
 CREATE TABLE ApplicationForms (
     form_id     INT IDENTITY(1,1) PRIMARY KEY,
     form_name   NVARCHAR(200) NOT NULL,
@@ -55,9 +40,6 @@ CREATE TABLE ApplicationForms (
 );
 GO
 
--- ----------------------------------------------------------------
--- FormSections
--- ----------------------------------------------------------------
 CREATE TABLE FormSections (
     section_id    INT IDENTITY(1,1) PRIMARY KEY,
     form_id       INT NOT NULL,
@@ -67,9 +49,6 @@ CREATE TABLE FormSections (
 );
 GO
 
--- ----------------------------------------------------------------
--- MasterDocuments
--- ----------------------------------------------------------------
 CREATE TABLE MasterDocuments (
     document_id   INT IDENTITY(1,1) PRIMARY KEY,
     document_name NVARCHAR(200) NOT NULL,
@@ -78,16 +57,13 @@ CREATE TABLE MasterDocuments (
 );
 GO
 
--- ----------------------------------------------------------------
--- FormDocumentConfig
--- ----------------------------------------------------------------
 CREATE TABLE FormDocumentConfig (
     config_id           INT IDENTITY(1,1) PRIMARY KEY,
     form_id             INT NOT NULL,
     section_id          INT NOT NULL,
     document_id         INT NOT NULL,
     allowed_file_format NVARCHAR(100) DEFAULT 'pdf,jpg,jpeg,png',
-    max_file_size       INT           DEFAULT 5242880,   -- 5 MB in bytes
+    max_file_size       INT           DEFAULT 5242880,  
     is_mandatory        BIT           DEFAULT 1,
     FOREIGN KEY (form_id)     REFERENCES ApplicationForms(form_id) ON DELETE CASCADE,
     FOREIGN KEY (section_id)  REFERENCES FormSections(section_id),
@@ -95,9 +71,6 @@ CREATE TABLE FormDocumentConfig (
 );
 GO
 
--- ----------------------------------------------------------------
--- Applications
--- ----------------------------------------------------------------
 CREATE TABLE Applications (
     application_id INT IDENTITY(1,1) PRIMARY KEY,
     form_id        INT NOT NULL,
@@ -110,9 +83,6 @@ CREATE TABLE Applications (
 );
 GO
 
--- ----------------------------------------------------------------
--- UploadedDocuments
--- ----------------------------------------------------------------
 CREATE TABLE UploadedDocuments (
     upload_id      INT IDENTITY(1,1) PRIMARY KEY,
     application_id INT NOT NULL,
@@ -126,11 +96,6 @@ CREATE TABLE UploadedDocuments (
 );
 GO
 
--- ================================================================
--- Seed Data
--- ================================================================
-
--- Seed Master Documents
 INSERT INTO MasterDocuments (document_name, description) VALUES
     ('Passport Copy',           'Valid passport - bio data page'),
     ('National ID Card',        'Government issued national identity card'),
@@ -145,7 +110,21 @@ INSERT INTO MasterDocuments (document_name, description) VALUES
     ('Police Clearance',        'Police clearance certificate'),
     ('Reference Letter',        'Professional reference letter');
 GO
-
+INSERT INTO MasterDocuments (document_name, description) VALUES
+('10th Memo', 'Secondary School Certificate marks memo'),
+('12th Memo', 'Intermediate marks memo'),
+('Degree Certificate', 'Bachelor degree certificate'),
+('Provisional Certificate', 'Temporary degree certificate'),
+('Transfer Certificate', 'College leaving certificate'),
+('Bonafide Certificate', 'Student bonafide proof'),
+('Aadhaar Card', 'Government issued Aadhaar identity card'),
+('PAN Card', 'Permanent Account Number card'),
+('Passport', 'International travel passport'),
+('Visa', 'Travel visa document'),
+('Passport Photo', 'Recent passport size photograph'),
+('Signature', 'Scanned signature image'),
+('Income Certificate', 'Government income certificate'),
+('Bank Passbook Copy', 'First page of bank passbook');
 PRINT 'Database setup complete!';
 PRINT 'Run: node seed.js to create admin and sample client users.';
 GO
