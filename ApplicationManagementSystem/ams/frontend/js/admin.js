@@ -14,17 +14,18 @@ async function initAdmin() {
 
 // ── Tab Switching ────────────────────────────────────────────
 function showTab(tab) {
-  ['overview','forms','applications'].forEach(t => {
+  ['overview','forms','applications','master'].forEach(t => {
     document.getElementById(`section-${t}`).classList.toggle('hidden', t !== tab);
     const link = document.getElementById(`tab-${t}`);
     if (link) link.classList.toggle('active', t === tab);
   });
 
-  const titles = { overview:'Dashboard Overview', forms:'Application Forms', applications:'All Applications' };
+  const titles = { overview:'Dashboard Overview', forms:'Application Forms', applications:'All Applications', master:'Master Documents' };
   document.getElementById('pageTitle').textContent = titles[tab] || tab;
 
   if (tab === 'forms')        loadForms();
   if (tab === 'applications') loadApplications();
+  if (tab === 'master')       loadMasterDocuments();
 }
 
 // ── Stats ────────────────────────────────────────────────────
@@ -195,6 +196,47 @@ async function downloadWithAuth(uploadId) {
   a.click();
   URL.revokeObjectURL(url);
   return false;
+}
+
+// ── Master Documents ─────────────────────────────────────────
+async function loadMasterDocuments() {
+  const res = await api.get('/upload/master-documents');
+  if (!res?.ok) { showToast('Failed to load master documents.','error'); return; }
+  const docs = res.data.data || [];
+  const tbody = document.getElementById('masterDocsTable');
+
+  if (docs.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="3" class="text-center py-4 text-slate-400">No documents defined yet. Add one above.</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = docs.map(d => `
+    <tr class="hover:bg-slate-50 transition">
+      <td class="px-6 py-3 text-slate-600 font-medium">${d.document_id}</td>
+      <td class="px-6 py-3 font-semibold text-slate-800">${d.document_name}</td>
+      <td class="px-6 py-3 text-slate-600">${d.description || '—'}</td>
+    </tr>
+  `).join('');
+}
+
+async function createMasterDocument() {
+  const name = document.getElementById('newMasterDocName').value.trim();
+  const desc = document.getElementById('newMasterDocDesc').value.trim();
+
+  if (!name) {
+    showToast('Document name is required.','error');
+    return;
+  }
+
+  const res = await api.post('/upload/master-documents', { document_name: name, description: desc });
+  if (res?.ok) {
+    showToast('Master document added.','success');
+    document.getElementById('newMasterDocName').value = '';
+    document.getElementById('newMasterDocDesc').value = '';
+    loadMasterDocuments();
+  } else {
+    showToast(res?.data?.message || 'Failed to add master document.','error');
+  }
 }
 
 // ── Create Form ───────────────────────────────────────────────
